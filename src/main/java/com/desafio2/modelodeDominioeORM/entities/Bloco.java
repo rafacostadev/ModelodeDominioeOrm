@@ -1,6 +1,7 @@
 package com.desafio2.modelodeDominioeORM.entities;
 
 import java.time.Instant;
+import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,7 +19,7 @@ public class Bloco {
 	private int id;
 	private Instant inicio;
 	private Instant fim;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "atividade_id")
 	private Atividade atividade;
@@ -56,6 +57,27 @@ public class Bloco {
 
 	public void setFim(Instant fim) {
 		this.fim = fim;
+	}
+
+	public Atividade getAtividade() {
+		return atividade;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Bloco other = (Bloco) obj;
+		return id == other.id;
 	}
 
 }
